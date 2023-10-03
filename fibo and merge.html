@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fibo and Merge</title>
+</head>
+<body>
+    <script>
+        // Fibonacci // 
+        function fibs (number) {
+            let first = 0;
+            let second = 1;
+            let arr = [first, second];
+
+            for (let i = 0; i < number - 2; i++) {
+                let temp1 = first;
+                let temp2 = second;
+                first = temp2;
+                second = temp1 + temp2;
+                arr.push(second);
+            }
+            return arr;
+        }
+
+        function fibsRec (num, sequence = [0, 1]) {
+            if (sequence.length >= num) {
+            return sequence.slice(0, num);
+        }
+            const newNumber = sequence[sequence.length - 1] + sequence[sequence.length - 2];
+            sequence.push(newNumber);
+            return fibsRec(num, sequence);
+        }
+        // Merge Sort // 
+
+        function mergeSort(array) {
+
+            if (array.length < 2) return array;
+             
+    
+            let half = Math.floor(array.length / 2); 
+            let left = array.slice(0,half);
+            let right = array.slice(half,array.length);
+
+            array = [];
+    
+            left = mergeSort(left);
+            right = mergeSort(right);
+
+            while (left.length && right.length) {
+                if (left[0] < right[0]) array.push(left.shift());
+                    else array.push(right.shift());
+            }
+            array = array.concat(left,right);
+            
+            return array;
+        }
+    </script>
+</body>
+</html>
